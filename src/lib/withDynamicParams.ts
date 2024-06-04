@@ -1,9 +1,15 @@
 const cannotDeduceErr =
   'Cannot deduce path, please provide a path to withDynamicParams';
 
+const patternToMatch = /app\/(.*?)\.tsx/;
+
 const parseStackLine = (stackLine: string): string => {
-  console.log('PARSING STACK LINE: ', stackLine);
-  return 'blah';
+  const match = stackLine.match(patternToMatch);
+  if (!match || !match[0]) {
+    throw new Error(cannotDeduceErr);
+  }
+
+  return match[0].replace('app', '');
 };
 
 const getPathFromErrorStack = (): string => {
@@ -14,7 +20,7 @@ const getPathFromErrorStack = (): string => {
 
   const stackLines = stack.split('\n');
   for (let stackLine of stackLines) {
-    if (stackLine.includes('/app/')) {
+    if (patternToMatch.test(stackLine)) {
       return parseStackLine(stackLine);
     }
   }
