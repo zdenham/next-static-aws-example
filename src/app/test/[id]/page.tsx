@@ -1,9 +1,19 @@
-'use client';
+type Params = {
+  id: string;
+};
 
-import { useParams } from 'next/navigation';
+type ParamsArg = {
+  params: Params;
+};
 
-export default function Post() {
-  const params = useParams(); // Fails on client
-
+export default function Post({ params }: ParamsArg) {
   return <h1>Slug is {params?.id}</h1>;
 }
+
+export const generateStaticParams = async () => {
+  return [
+    {
+      id: 'fallback',
+    },
+  ];
+};
