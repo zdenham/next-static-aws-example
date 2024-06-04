@@ -1,3 +1,5 @@
+import { withDynamicParams } from '@/lib/withDynamicParams';
+
 type Params = {
   id: string;
 };
@@ -10,10 +12,4 @@ export default function Post({ params }: ParamsArg) {
   return <h1>Slug is {params?.id}</h1>;
 }
 
-export const generateStaticParams = async () => {
-  return [
-    {
-      id: 'fallback',
-    },
-  ];
-};
+export const generateStaticParams = withDynamicParams();
