@@ -16,7 +16,7 @@ export const withDynamicParams = (
   };
 };
 
-const parseStackLine = (stackLine: string): string => {
+export const parseStackLine = (stackLine: string): string => {
   const match = stackLine.match(patternToMatch);
   if (!match || !match[0]) {
     throw new Error(cannotDeduceErr);
@@ -25,7 +25,7 @@ const parseStackLine = (stackLine: string): string => {
   return match[0].replace('app', '');
 };
 
-const getPathFromErrorStack = (): string => {
+export const getPathFromErrorStack = (): string => {
   const stack = new Error().stack;
   if (!stack) {
     throw new Error(cannotDeduceErr);
@@ -41,7 +41,7 @@ const getPathFromErrorStack = (): string => {
   throw new Error(cannotDeduceErr);
 };
 
-const getFallbackParamsFromPath = (
+export const getFallbackParamsFromPath = (
   path: string
 ): Record<string, typeof FALLBACK_STRING> => {
   const pathParts = path.split('/');
