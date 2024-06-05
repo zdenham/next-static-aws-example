@@ -1,3 +1,7 @@
+import { getDynamicRoutes } from './getDynamicRoutes';
+
+export const dynamicRoutes = getDynamicRoutes();
+
 const FALLBACK_STRING = 'next-static-fallback';
 
 const cannotDeduceErr =
@@ -9,6 +13,7 @@ export const withDynamicParams = (
   staticParamsFunc?: ParamsFunc,
   path: string = getPathFromErrorStack()
 ): ParamsFunc => {
+  console.log('FILENAME: ', __filename);
   const fallbackParams = getFallbackParamsFromPath(path);
   return async () => {
     const staticParamsArr = staticParamsFunc ? await staticParamsFunc() : [];
