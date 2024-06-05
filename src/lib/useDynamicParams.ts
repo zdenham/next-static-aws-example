@@ -1,14 +1,12 @@
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-import { useRouter } from 'next/router';
+import { dynamicRoutes } from './dynamicRoutes';
+import { extractParamsFromPath } from './extractParamsFromPath';
 
 export const useDynamicParams = (): Record<string, string> => {
-  console.log('ABOUT TO GET PATH NAMEE!!!');
   const pathName = usePathname();
-  const params = useParams();
-  const router = useRouter();
 
-  console.log('PATH: ', router.asPath, pathName, params);
+  const params = extractParamsFromPath(pathName, dynamicRoutes) || {};
 
-  return { id: 'hello' };
+  return params;
 };

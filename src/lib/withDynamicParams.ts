@@ -1,7 +1,3 @@
-import { getDynamicRoutes } from './getDynamicRoutes';
-
-export const dynamicRoutes = getDynamicRoutes();
-
 const FALLBACK_STRING = 'next-static-fallback';
 
 const cannotDeduceErr =
@@ -11,7 +7,7 @@ const patternToMatch = /app\/(.*?)\.(tsx|js|jsx)/;
 
 export const withDynamicParams = (
   staticParamsFunc?: ParamsFunc,
-  path: string = getPathFromErrorStack()
+  path: string = getPathFromFileName()
 ): ParamsFunc => {
   console.log('FILENAME: ', __filename);
   const fallbackParams = getFallbackParamsFromPath(path);
@@ -21,8 +17,8 @@ export const withDynamicParams = (
   };
 };
 
-export const parseStackLine = (stackLine: string): string => {
-  const match = stackLine.match(patternToMatch);
+export const parsePagePath = (pagePath: string): string => {
+  const match = pagePath.match(patternToMatch);
   if (!match || !match[0]) {
     throw new Error(cannotDeduceErr);
   }
@@ -30,7 +26,16 @@ export const parseStackLine = (stackLine: string): string => {
   return match[0].replace('app', '');
 };
 
-export const getPathFromErrorStack = (): string => {
+const getPathFromFileName = (): string => {
+  const fileName = __filename;
+  if (!fileName) {
+    throw new Error(cannotDeduceErr);
+  }
+
+  return parsePagePath(fileName);
+};
+
+const getPathFromErrorStack = (): string => {
   const stack = new Error().stack;
   if (!stack) {
     throw new Error(cannotDeduceErr);
@@ -39,7 +44,7 @@ export const getPathFromErrorStack = (): string => {
   const stackLines = stack.split('\n');
   for (let stackLine of stackLines) {
     if (patternToMatch.test(stackLine)) {
-      return parseStackLine(stackLine);
+      return parsePagePath(stackLine);
     }
   }
 
