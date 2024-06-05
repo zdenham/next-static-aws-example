@@ -1,4 +1,4 @@
-import { findFolderPath, findAllFilesInFolder } from './fs';
+import { findFolderPath, findAllFilesInFolder } from './fsUtils';
 
 const isDynamicPage = (file: string) => {
   return (

@@ -4,11 +4,9 @@ import { usePathname } from 'next/navigation';
 
 const dynamicRoutes = getDynamicRoutes();
 
-export const useDynamicParams = () => {
-  return () => {
-    const pathName = usePathname();
-    const params = extractParamsFromPath(pathName, dynamicRoutes);
+export const useDynamicParams = (): Record<string, string> => {
+  const pathName = usePathname();
+  const params = extractParamsFromPath(pathName, dynamicRoutes) || {};
 
-    return params;
-  };
+  return params;
 };
