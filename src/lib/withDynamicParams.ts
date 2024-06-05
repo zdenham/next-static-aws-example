@@ -1,17 +1,17 @@
-const FALLBACK_STRING = 'next-static';
+const FALLBACK_STRING = 'next-static-fallback';
 
 const cannotDeduceErr =
   'Cannot deduce path, please provide a path to withDynamicParams';
 
-const patternToMatch = /app\/(.*?)\.tsx/;
+const patternToMatch = /app\/(.*?)\.(tsx|js|jsx)/;
 
 export const withDynamicParams = (
   staticParamsFunc?: ParamsFunc,
   path: string = getPathFromErrorStack()
 ): ParamsFunc => {
+  const fallbackParams = getFallbackParamsFromPath(path);
   return async () => {
     const staticParamsArr = staticParamsFunc ? await staticParamsFunc() : [];
-    const fallbackParams = getFallbackParamsFromPath(path);
     return [...staticParamsArr, fallbackParams];
   };
 };
@@ -46,12 +46,15 @@ const getFallbackParamsFromPath = (
 ): Record<string, typeof FALLBACK_STRING> => {
   const pathParts = path.split('/');
 
-  const params = pathParts.map((part) => {
-    if (part.startsWith('[') && part.endsWith(']')) {
-      return FALLBACK_STRING;
-    }
-    return part.replace('[', '').replace(']', '');
-  });
+  const params = pathParts
+    .map((part) => {
+      if (part.startsWith('[') && part.endsWith(']')) {
+        return part.replace('[', '').replace(']', '');
+      }
+
+      return '';
+    })
+    .filter((part) => !!part);
 
   return params.reduce((acc, param) => {
     acc[param] = FALLBACK_STRING;
