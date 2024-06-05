@@ -1,4 +1,4 @@
-import { withDynamicParams } from '@/lib/withDynamicParams';
+import { withDynamicParams } from 'next-static-utils';
 import { ID } from '@/components/ID';
 import Link from 'next/link';
 

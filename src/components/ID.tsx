@@ -1,6 +1,6 @@
 'use client';
 
-import { useDynamicParams } from '@/lib/useDynamicParams';
+import { useDynamicParams } from 'next-static-utils';
 
 export function ID() {
   const { id } = useDynamicParams();
