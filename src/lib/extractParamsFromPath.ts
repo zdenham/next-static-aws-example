@@ -3,11 +3,8 @@ export const extractParamsFromPath = (
   dynamicRoutes: string[]
 ) => {
   for (let format of dynamicRoutes) {
-    // Strip off the page.tsx part if it's included in the format
-    let strippedFormat = format.replace(/\/page\.tsx$/, '');
-
     // Convert the format to a regular expression
-    let regexStr = strippedFormat.replace(/\[([^\]]+)\]/g, '(?<$1>[^/]+)');
+    let regexStr = format.replace(/\[([^\]]+)\]/g, '(?<$1>[^/]+)');
     let regex = new RegExp(`^${regexStr}$`);
 
     // Test if the path matches the format
