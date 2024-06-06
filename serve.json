@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/test/:id",
+      "destination": "/test/next-static-fallback.html"
+    }
+  ]
+}
