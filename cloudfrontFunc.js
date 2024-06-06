@@ -9,7 +9,11 @@ const serveConfig = {
 };
 function handler(event) {
   var request = event.request;
+  var response = event.response;
   var uri = request.uri;
+  if (response.status !== '404') {
+    return request;
+  }
   function isMatch(pattern, path) {
     // Escape any special regex characters in the pattern
     const escapedPattern = pattern.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
