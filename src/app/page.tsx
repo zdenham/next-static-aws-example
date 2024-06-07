@@ -14,7 +14,7 @@ export default function Home() {
         This is a static next.js website hosted on s3 + cloudfront built using{' '}
         <a href="https://github.com/zdenham/next-static-utils" target="_blank">
           next-static-utils
-        </a>{' '}
+        </a>
         . This site demonstrates dynamic url parameters using the app router.
         Type in any slug below to visit a dynamic page.
       </p>
