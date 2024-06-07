@@ -18,13 +18,20 @@ export default function Home() {
         . This site demonstrates dynamic url parameters using the app router.
         Type in any slug below to visit a dynamic page.
       </p>
-      <div>
-        <p>/blog/</p>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          height: 20,
+        }}
+      >
+        <div>/blog/</div>
         <input
+          style={{ marginRight: 25, marginLeft: 5 }}
           onChange={(e) => setDynamicSlug(e.target.value)}
           value={dynamicSlug}
         ></input>
-        <Link href={`/blog/${dynamicSlug}`}>Go to Dynamic Page</Link>
+        <Link href={`/blog/${dynamicSlug}`}>Visit Dynamic Route</Link>
       </div>
     </div>
   );
