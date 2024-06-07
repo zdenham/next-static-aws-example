@@ -9,8 +9,8 @@ dependencies:
     specifier: 14.2.3
     version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
   next-static-utils:
-    specifier: file:../next-static
-    version: file:../next-static(next@14.2.3)(react@18.3.1)
+    specifier: ^1.0.4
+    version: 1.0.4(next@14.2.3)(react@18.3.1)
   react:
     specifier: ^18
     version: 18.3.1
@@ -586,6 +586,17 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  /next-static-utils@1.0.4(next@14.2.3)(react@18.3.1):
+    resolution: {integrity: sha512-GcXisYcnTxJmlJINBeqydxVoUxYFXT49RwiR2WrvD+G/rXYe7fx9lQiYvYswtj0Xd9yvq15Zt1011dO/AVR4+w==}
+    hasBin: true
+    peerDependencies:
+      next: ^14.2.3
+      react: ^18
+    dependencies:
+      next: 14.2.3(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+    dev: false
+
   /next@14.2.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-dowFkFTR8v79NPJO4QsBUtxv0g9BrS/phluVpMAt2ku7H+cbcBJlopXjkWlwxrk/xGqMemr7JkGPGemPrLLX7A==}
     engines: {node: '>=18.17.0'}
@@ -1015,16 +1026,3 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
     dev: true
-
-  file:../next-static(next@14.2.3)(react@18.3.1):
-    resolution: {directory: ../next-static, type: directory}
-    id: file:../next-static
-    name: next-static-utils
-    hasBin: true
-    peerDependencies:
-      next: ^14.2.3
-      react: ^18
-    dependencies:
-      next: 14.2.3(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-    dev: false

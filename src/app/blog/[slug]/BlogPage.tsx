@@ -1,3 +1,5 @@
+'use client';
+
 import { FALLBACK_STRING, useDynamicParams } from 'next-static-utils';
 
 export default function BlogPage() {
